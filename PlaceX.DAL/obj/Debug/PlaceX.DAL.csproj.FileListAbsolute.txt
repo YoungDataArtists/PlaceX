@@ -1,0 +1,13 @@
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\PlaceX.DAL.dll.config
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\PlaceX.DAL.dll
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\PlaceX.DAL.pdb
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\Common.DLL.dll
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\EntityFramework.dll
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\Common.DLL.pdb
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\Common.DLL.dll.config
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\EntityFramework.xml
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\obj\Debug\PlaceX.DAL.csprojResolveAssemblyReference.cache
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\obj\Debug\PlaceX.DAL.dll
+E:\Dev\DataArtProject\PlaceX\PlaceX.DAL\obj\Debug\PlaceX.DAL.pdb
