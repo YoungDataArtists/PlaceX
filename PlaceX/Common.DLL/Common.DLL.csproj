@@ -47,11 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Like.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\Photo.cs" />
+    <Compile Include="Entities\Position.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserInterest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entityes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
