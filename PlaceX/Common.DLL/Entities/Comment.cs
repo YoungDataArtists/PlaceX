@@ -6,13 +6,6 @@ using System.Threading.Tasks;
 
 namespace Common.DLL.Entities
 {
-    public enum Visibility
-    {
-        All,
-        MyFriends,
-        CertainPerson,
-        OnlyMe
-    }
     public class Comment
     {
         public int Id { get; set; }
