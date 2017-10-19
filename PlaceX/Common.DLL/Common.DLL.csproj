@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Comment2.cs" />
     <Compile Include="Entities\Interests.cs" />
     <Compile Include="Entities\Like.cs" />
     <Compile Include="Entities\Location.cs" />
