@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.DLL.Entities
 {
+    
     public class Comment
     {
         public int Id { get; set; }
