@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicAjaxResponse.cs" />
     <Compile Include="Entities\Comment.cs" />
-    <Compile Include="Entities\Comment2.cs" />
     <Compile Include="Entities\Interests.cs" />
     <Compile Include="Entities\Like.cs" />
     <Compile Include="Entities\Location.cs" />
@@ -58,6 +58,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInterest.cs" />
     <Compile Include="Entities\Visibility.cs" />
+    <Compile Include="PlaceXContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -13,6 +13,8 @@ namespace Common.DLL.Entities
         public string City { get; set; }
         public string Street { get; set; }
         public string HouseNumber { get; set; }
+        public double Lat { get; set; }
+        public double Lng { get; set; }
 
     }
 }
