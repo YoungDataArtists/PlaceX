@@ -10,22 +10,6 @@
 </head>
 <body>
 	
-	<div id="mySidenav" class="sidenav">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a>@Html.ActionLink("Home", "Index", "Home")</a>
-		<a>@Html.ActionLink("About", "About", "Home")</a>
-		<a>@Html.ActionLink("Contact", "Contact", "Home")</a>
-	</div>
-
-	<span onclick="openNav()">Menu</span>
-<script>
-	function openNav() {
-		document.getElementById("mySidenav").style.width = "250px";
-	}
-	function closeNav() {
-		document.getElementById("mySidenav").style.width = "0";
-	}
-</script>
 
 <div class="container body-content">
 			@RenderBody()

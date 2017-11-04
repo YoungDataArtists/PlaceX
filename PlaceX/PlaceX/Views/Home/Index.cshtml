@@ -3,27 +3,10 @@
 
 }
 
-<div class="row">
-	<div class="col-sm-10">
 
 		<div id="map" style="height: 400px"></div>
 
-	</div>
-	<div class="col-sm-2">
 
-		<p>Add marker</p>
-		
-		<div id="floating-panel" >
-			@using (Html.BeginForm("GetCoordinatesFromUser", "Home", FormMethod.Post))
-            {
-				<input type="text" id="UpdateDiv" value="" name="Comment" style="width: 100%;"><br />
-				<input type="submit" value="Add new point" />
-            }
-		</div>
-
-	</div>
-
-</div>
 
 @section scripts{
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA31oQmPpgh78elc-b7mYijwsSQF6ni4tA"></script>
