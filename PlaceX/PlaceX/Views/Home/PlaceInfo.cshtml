@@ -1,0 +1,22 @@
+﻿@model PlaceX.Models.PlaceViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well">
+                <div class="headerPlace" style="height:100px">
+                    <img src="@Model.IconPath" style="float:left; margin-right: 5px;" />
+                    <h1 class="text-center">@Model.Name</h1>
+                </div>
+                <div class="bodyPlace">
+                    <ul>
+                        <li>Id: @Model.Id</li>
+                        <li>Address: @Model.Address</li>
+                        <li>PhoneNumber: @Model.PhoneNumber</li>
+                        <li>Google Rating: @Model.GoogleRating</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

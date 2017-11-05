@@ -8,82 +8,54 @@ using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using PlaceX.Models;
 
 namespace PlaceX.Controllers
 {
     public class HomeController : Controller
     {
-        static List<Position> positions;
-
-        public HomeController()
-        {
-            if (positions == null)
-                positions = new List<Position>();
-        }
-
         public ActionResult Index()
         {
             return View();
         }
 
-        //Get data from staic field "positions" and
-        //send it to UI
-        public ActionResult GetGeoJson()
+        public ActionResult PlaceInfo(string placeId)
         {
-            string serializedData = string.Empty;
+            string placeInfo = GetPlaceJson("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8&language=ru");
 
-            FeatureCollection featureCollection = new FeatureCollection();
+            dynamic foo = JObject.Parse(placeInfo);
 
-            foreach (var pos in positions)
+            try
             {
-                var point = new Point(pos);
-                var featureProperties = new Dictionary<string, object> { { "Name", pos.GetHashCode().ToString() } };
-                var model = new Feature(point, featureProperties);
-                featureCollection.Features.Add(model);
-            }
-
-            serializedData = JsonConvert.SerializeObject(featureCollection, Formatting.Indented,
-                      new JsonSerializerSettings
-                      {
-                          ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                          NullValueHandling = NullValueHandling.Ignore
-                      });
-            return Content(serializedData, "application/json");
-   
-        }
-
-        //Get data from UI and
-        //save in our list "positions"
-        [HttpPost]
-        public RedirectToRouteResult GetCoordinatesFromUser(string stringOfCoordinates)
-        {
-            string[] s = stringOfCoordinates.Replace(',', ' ').Replace('(', ' ').Replace(')', ' ').Split(' ');
-            for (int i = 0; i < s.Length - 1;)
-            {
-                Position newPosition = new Position(s[i + 1], s[i + 3]);
-                if (newPosition != null)
+                PlaceViewModel targetPlace = new PlaceViewModel()
                 {
-                    positions.Add(newPosition);
-                }
-                i = i + 4;
+                    Id = placeId,
+                    Name = foo.result.name,
+                    Address = foo.result.formatted_address,
+                    PhoneNumber = foo.result.international_phone_number,
+                    IconPath = foo.result.icon,
+                    GoogleRating = foo.result.rating
+                };
+
+                return View(targetPlace);
             }
-            return RedirectToAction("Index", "Home", null);
-         
+            catch(Exception ex)
+            {
+                return View("Index");
+            }           
         }
 
-
-        public ActionResult About()
+        private string GetPlaceJson(string url)
         {
-            ViewBag.Message = "Your application description page.";
+            using (WebClient wc = new WebClient())
+            {
+                wc.Encoding = System.Text.Encoding.UTF8;
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+                var json = wc.DownloadString(url);
+                return json;
+            }
         }
     }
 }
