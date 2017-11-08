@@ -24,8 +24,13 @@
 .container-fluid {
     position: absolute;
     z-index:1000;
+    left:0;
+    width:100%;
   
 }
 .btn-default{
-   float:right;
+   margin-right:5%;
+}
+.navbar-form{
+   
 }
