@@ -12,7 +12,7 @@
             streetViewControl: false,
             rotateControl: false,
             fullscreenControl: false
-            
+
         };
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
