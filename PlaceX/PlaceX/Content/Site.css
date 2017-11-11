@@ -3,7 +3,7 @@
     padding-bottom: 0px;
     overflow-x: hidden;
     transition: margin-left .5s;
-    padding: 5px;
+    margin: 0 auto;
 }
 
 
@@ -19,7 +19,10 @@
     */
 .map {
     height:100%;
-    width:100%;
+    width:100%;   
+}
+footer, hr {
+    display: none;
 }
 .container-fluid {
     position: absolute;
