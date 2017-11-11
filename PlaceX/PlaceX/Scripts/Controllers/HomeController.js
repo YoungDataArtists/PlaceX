@@ -121,3 +121,13 @@
             $('#loginModal .modal-dialog').removeClass('shake');
         }, 1000);
     }
+    // тут лютый костыль из-за особенностей гугл api
+    setTimeout(mapPosition, 1000);
+    function mapPosition() {
+        $("#map").css({
+            "position": "static",
+            "height": "100%",
+            "width": "100%"
+        });
+    }
+    
