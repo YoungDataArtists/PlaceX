@@ -1,4 +1,5 @@
 ﻿    var map;
+    var myloc;
 
     function initialize() {
         var centerPoint = new google.maps.LatLng(46.483232, 30.738147);
@@ -44,7 +45,11 @@
 
         });
         autocomplete.setTypes(['establishment']);
-        //***End AutocompleteSearch***
+        //***End AutocompleteSearch***     
+
+        //Ask user if it is allowed to use his position
+        watchMyPosition();
+
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
@@ -79,6 +84,36 @@
             }
         });
     };
+
+    
+    function watchMyPosition()
+    {
+        myloc = new google.maps.Marker({
+            clickable: false,
+            icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                new google.maps.Size(22, 22),
+                new google.maps.Point(0, 18),
+                new google.maps.Point(11, 11)),
+            shadow: null,
+            zIndex: 999,
+            map: map
+        });
+
+        if (navigator.geolocation) 
+            navigator.geolocation.watchPosition(function (pos) {
+                var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                myloc.setPosition(me);
+                map.setCenter(me);
+            }, function (error) {
+                var btnMyLocation = document.getElementById('btn-my-location');
+                btnMyLocation.classList.add("disabled");
+                });
+    }
+
+    function showMyPosition()
+    {
+            map.setCenter(myloc.position);
+    }
 
 
 
