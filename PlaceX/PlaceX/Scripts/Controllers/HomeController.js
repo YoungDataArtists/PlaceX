@@ -18,6 +18,33 @@
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
         var clickHandler = new ClickEventHandler(map, centerPoint);
+
+        //***Begin AutocompleteSearch***
+        var input = /** @type {!HTMLInputElement} */(document.getElementById('search-input'));
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+        autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+
+            if (!place.geometry) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+                clickHandler.getPlaceInformation(place.place_id);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);  // Why 17? Because it looks good.
+
+            }
+
+        });
+        autocomplete.setTypes(['establishment']);
+        //***End AutocompleteSearch***
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
