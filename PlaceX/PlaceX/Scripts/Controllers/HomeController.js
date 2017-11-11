@@ -80,6 +80,7 @@
                     '<div><img src="' + place.icon + '" height="50" width="50"> '
                     + '<big><strong>' + place.name + '</strong></big><br>' + place.formatted_address + '</div>' +
                     '<a href="/Home/PlaceInfo?placeId=' + place.place_id + '" target="_blank">Подробнее...</a>');
+                map.setZoom(17); 
                 me.infowindow.open(me.map);
             }
         });
