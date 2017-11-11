@@ -1,4 +1,5 @@
 ﻿    var map;
+    var myloc;
 
     function initialize() {
         var centerPoint = new google.maps.LatLng(46.483232, 30.738147);
@@ -47,6 +48,24 @@
         //***End AutocompleteSearch***
     }
 
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+                clickHandler.getPlaceInformation(place.place_id);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);  // Why 17? Because it looks good.
+
+            }
+
+        });
+        autocomplete.setTypes(['establishment']);
+        //***End AutocompleteSearch***     
+
+        //Ask user if it is allowed to use his position
+        watchMyPosition();
+
+    }
+
     google.maps.event.addDomListener(window, 'load', initialize);
 
     var ClickEventHandler = function (map, origin) {
@@ -75,7 +94,117 @@
                     '<div><img src="' + place.icon + '" height="50" width="50"> '
                     + '<big><strong>' + place.name + '</strong></big><br>' + place.formatted_address + '</div>' +
                     '<a href="/Home/PlaceInfo?placeId=' + place.place_id + '" target="_blank">Подробнее...</a>');
+                map.setZoom(17); 
                 me.infowindow.open(me.map);
             }
         });
     };
+
+    
+    function watchMyPosition()
+    {
+        myloc = new google.maps.Marker({
+            clickable: false,
+            icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                new google.maps.Size(22, 22),
+                new google.maps.Point(0, 18),
+                new google.maps.Point(11, 11)),
+            shadow: null,
+            zIndex: 999,
+            map: map
+        });
+
+        if (navigator.geolocation) 
+            navigator.geolocation.watchPosition(function (pos) {
+                var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                myloc.setPosition(me);
+                map.setCenter(me);
+            }, function (error) {
+                var btnMyLocation = document.getElementById('btn-my-location');
+                btnMyLocation.classList.add("disabled");
+                });
+    }
+
+    function showMyPosition()
+    {
+            map.setCenter(myloc.position);
+    }
+
+
+
+
+
+
+
+
+    function showRegisterForm() {
+        $('.loginBox').fadeOut('fast', function () {
+            $('.registerBox').fadeIn('fast');
+            $('.login-footer').fadeOut('fast', function () {
+                $('.register-footer').fadeIn('fast');
+            });
+            $('.modal-title').html('Register with');
+        });
+        $('.error').removeClass('alert alert-danger').html('');
+
+    }
+    function showLoginForm() {
+        $('#loginModal .registerBox').fadeOut('fast', function () {
+            $('.loginBox').fadeIn('fast');
+            $('.register-footer').fadeOut('fast', function () {
+                $('.login-footer').fadeIn('fast');
+            });
+
+            $('.modal-title').html('Login with');
+        });
+        $('.error').removeClass('alert alert-danger').html('');
+    }
+
+    function openLoginModal() {
+        showLoginForm();
+        setTimeout(function () {
+            $('#loginModal').modal('show');
+        }, 230);
+
+    }
+    function openRegisterModal() {
+        showRegisterForm();
+        setTimeout(function () {
+            $('#loginModal').modal('show');
+        }, 230);
+
+    }
+
+    function loginAjax() {
+        /*   Remove this comments when moving to server
+        $.post( "/login", function( data ) {
+                if(data == 1){
+                    window.location.replace("/home");            
+                } else {
+                     shakeModal(); 
+                }
+            });
+        */
+
+        /*   Simulate error message from the server   */
+        shakeModal();
+    }
+
+    function shakeModal() {
+        $('#loginModal .modal-dialog').addClass('shake');
+        $('.error').addClass('alert alert-danger').html("Invalid email/password combination");
+        $('input[type="password"]').val('');
+        setTimeout(function () {
+            $('#loginModal .modal-dialog').removeClass('shake');
+        }, 1000);
+    }
+    // тут лютый костыль из-за особенностей гугл api
+    setTimeout(mapPosition, 1000);
+    function mapPosition() {
+        $("#map").css({
+            "position": "static",
+            "height": "100%",
+            "width": "100%"
+        });
+    }
+    
