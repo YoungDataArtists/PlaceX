@@ -12,7 +12,8 @@
             scaleControl: false,
             streetViewControl: false,
             rotateControl: false,
-            fullscreenControl: false
+            fullscreenControl: false,
+            gestureHandling: 'auto'
 
         };
 
@@ -40,30 +41,14 @@
             } else {
                 map.setCenter(place.geometry.location);
                 map.setZoom(17);  // Why 17? Because it looks good.
-
             }
 
         });
         autocomplete.setTypes(['establishment']);
-        //***End AutocompleteSearch***
-    }
-
-            if (place.geometry.viewport) {
-                map.fitBounds(place.geometry.viewport);
-                clickHandler.getPlaceInformation(place.place_id);
-            } else {
-                map.setCenter(place.geometry.location);
-                map.setZoom(17);  // Why 17? Because it looks good.
-
-            }
-
-        });
-        autocomplete.setTypes(['establishment']);
-        //***End AutocompleteSearch***     
+        //***End AutocompleteSearch***      
 
         //Ask user if it is allowed to use his position
         watchMyPosition();
-
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
@@ -100,7 +85,7 @@
         });
     };
 
-    
+    //
     function watchMyPosition()
     {
         myloc = new google.maps.Marker({
@@ -129,8 +114,6 @@
     {
             map.setCenter(myloc.position);
     }
-
-
 
 
 
