@@ -13,7 +13,7 @@
             streetViewControl: false,
             rotateControl: false,
             fullscreenControl: false,
-            gestureHandling: 'auto'
+            gestureHandling: 'greedy'
 
         };
 
