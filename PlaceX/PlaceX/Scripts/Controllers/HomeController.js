@@ -12,7 +12,8 @@
             scaleControl: false,
             streetViewControl: false,
             rotateControl: false,
-            fullscreenControl: false
+            fullscreenControl: false,
+            gestureHandling: 'auto'
 
         };
 
