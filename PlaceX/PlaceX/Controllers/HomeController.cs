@@ -36,7 +36,8 @@ namespace PlaceX.Controllers
                     Address = foo.result.formatted_address,
                     PhoneNumber = foo.result.international_phone_number,
                     IconPath = foo.result.icon,
-                    GoogleRating = foo.result.rating
+                    GoogleRating = foo.result.rating,
+                    PhotoUrl = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos.First.photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon
                 };
 
                 return View(targetPlace);
