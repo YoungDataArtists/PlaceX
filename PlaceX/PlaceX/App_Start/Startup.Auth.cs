@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Web.Hosting;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -57,12 +59,15 @@ namespace PlaceX
             //app.UseFacebookAuthentication(
             //   appId: "",
             //   appSecret: "");
+            StreamReader sr1 = new StreamReader(HostingEnvironment.MapPath(@"~/App_Data/GoogleCredentials.txt"));
+            string googleClientId = sr1.ReadLine();
+            string googleClientSecret = sr1.ReadLine();
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = googleClientId,
+                ClientSecret = googleClientSecret
+            });
         }
     }
 }

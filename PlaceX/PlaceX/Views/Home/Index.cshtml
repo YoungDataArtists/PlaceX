@@ -37,7 +37,7 @@
                     <div class="content">
                         <div class="social">
                          
-                            <a id="google_login" class="circle google" href="#">
+                            <a id="google_login" class="circle google" href='@Url.Action("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl })'>
                                 <i class="fa fa-google-plus fa-fw"></i>
                             </a>
                             <a id="facebook_login" class="circle facebook" href="#">f
