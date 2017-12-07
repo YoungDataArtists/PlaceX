@@ -62,18 +62,13 @@
                 <div class="box">
                     <div class="content registerBox" style="display:none;">
                         <div class="form">
-                            @*<form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">*@
                             @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                              {
                                  @Html.AntiForgeryToken()
                                  <input id="email" class="form-control" type="text" placeholder="Email" name="email">
                                  <input id="password" class="form-control" type="password" placeholder="Password" name="Password">
-                                 @*<input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">*@
                                  <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="ConfirmPassword">
-                                 <input type="submit" class="btn btn-default" value="Register" />
-
-                                 @*<input class="btn btn-default btn-register" type="button" value="Create account" name="commit">*@
-                                 @*</form>*@
+                                 <input type="submit" class="btn btn-default" value="Create account" />
                              }
                         </div>
                     </div>
