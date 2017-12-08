@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using PlaceX.Models;
+using System.Net.Mail;
 
 namespace PlaceX
 {
