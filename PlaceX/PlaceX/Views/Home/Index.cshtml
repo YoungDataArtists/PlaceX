@@ -17,12 +17,21 @@
 
                 <button type="button" class="btn btn-primary" id="btn-my-location" title="To my location!" onclick="showMyPosition()"><span class="glyphicon glyphicon-map-marker"></span></button>
 
-                <button data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();" class="btn btn-default pull-right">Sign Up</button>
-                </form>
-          
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-
+                <div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="navbar-text">
+                            <p>Вы вошли как: @User.Identity.Name / @Html.ActionLink("Выйти", "LogOff", "Account", null, new { style = "color: rgb(157, 157, 157)" }) </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <button data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();" class="btn btn-default pull-right">Sign Up</button>
+                    }
+                </div>
+            </form>          
+        </div>
+</div>
 
 
 <div class="modal fade login" id="loginModal">
