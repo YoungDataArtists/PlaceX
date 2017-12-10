@@ -35,9 +35,3 @@ _ReSharper*/
 *.[Cc]ache
 
 !*.[Cc]ache/
-PlaceX/PlaceX/App_Data/aspnet-PlaceX-20171018123649.mdf
-PlaceX/PlaceX/App_Data/aspnet-PlaceX-20171018123649_log.ldf
-PlaceX/PlaceX/Controllers/HomeController.cs
-PlaceX/PlaceX/Views/Home/Index.cshtml
-PlaceX/PlaceX/App_Data/aspnet-PlaceX-20171018123649_log.ldf
-PlaceX/PlaceX/App_Data/aspnet-PlaceX-20171018123649.mdf
