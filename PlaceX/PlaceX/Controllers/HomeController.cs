@@ -22,6 +22,7 @@ namespace PlaceX.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult PlaceInfo(string placeId)
         {
             string placeInfo = GetPlaceJson("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8&language=ru");
