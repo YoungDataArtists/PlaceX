@@ -47,12 +47,16 @@
                 <h4 class="modal-title">Login with</h4>
             </div>
             <div class="modal-body">
+
                 <div class="box">
                     <div class="content">
                         <div class="social">
-                            <a id="google_login" class="circle google" @Url.Action("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl })>
-                                <i class="fa fa-google-plus" aria-hidden="true"></i>
-                            </a>
+                            @using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="submit" id="google_login" class="circle google" name="provider" value="Google" title="Log in using your Google account"/>
+                            }
+                        @*<i class="fa fa-google-plus" aria-hidden="true"></i>*@
                             <a id="facebook_login" class="circle facebook" href="#">
                                 <i class="fa fa-facebook fa-fw"></i>
                             </a>
