@@ -55,13 +55,15 @@ namespace PlaceX
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
-
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
-            StreamReader sr1 = new StreamReader(HostingEnvironment.MapPath(@"~/App_Data/GoogleCredentials.txt"));
-            string googleClientId = sr1.ReadLine();
-            string googleClientSecret = sr1.ReadLine();
+            StreamReader sr1 = new StreamReader(HostingEnvironment.MapPath(@"~/App_Data/FacebookCredentials.txt"));
+            string facebookAppId = sr1.ReadLine();
+            string facebookClientSecret = sr1.ReadLine();
+            app.UseFacebookAuthentication(
+               appId: facebookAppId,
+               appSecret: facebookClientSecret);
+            StreamReader sr2 = new StreamReader(HostingEnvironment.MapPath(@"~/App_Data/GoogleCredentials.txt"));
+            string googleClientId = sr2.ReadLine();
+            string googleClientSecret = sr2.ReadLine();
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
