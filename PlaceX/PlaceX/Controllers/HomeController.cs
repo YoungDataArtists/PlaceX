@@ -21,7 +21,7 @@ namespace PlaceX.Controllers
         {
             return View();
         }
-        [AllowAnonymous]
+
         public ActionResult PlaceInfo(string placeId)
         {
             string placeInfo = GetPlaceJson("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8&language=ru");
@@ -38,13 +38,9 @@ namespace PlaceX.Controllers
                     PhoneNumber = foo.result.international_phone_number,
                     IconPath = foo.result.icon,
                     GoogleRating = foo.result.rating,
-                    PhotosUrls = new object[foo.result.photos.Count]
+                    PhotoUrl = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos.First.photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon
                 };
-                
-                for (int i = 0; i < foo.result.photos.Count; i++) 
-                {
-                    targetPlace.PhotosUrls[i] = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos[i].photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon;
-                }
+
                 return View(targetPlace);
             }
             catch(Exception ex)

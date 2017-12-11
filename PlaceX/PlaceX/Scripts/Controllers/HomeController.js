@@ -73,13 +73,11 @@
         var me = this;
         this.placesService.getDetails({ placeId: placeId }, function (place, status) {
             if (status === 'OK') {
-                var photos = place.photos;
                 me.infowindow.close();
                 me.infowindow.setPosition(place.geometry.location);
                 me.infowindow.setContent(
-                    '<div><img src="' + place.icon + '" height="15" width="15"> '
+                    '<div><img src="' + place.icon + '" height="50" width="50"> '
                     + '<big><strong>' + place.name + '</strong></big><br>' + place.formatted_address + '</div>' +
-                    '<div><img src = "'+ photos[0].getUrl({ 'maxWidth': 150, 'maxHeight': 150 }) + '">' +'</div>'+
                     '<a href="/Home/PlaceInfo?placeId=' + place.place_id + '" target="_blank">Подробнее...</a>');
                 map.setZoom(17); 
                 me.infowindow.open(me.map);
