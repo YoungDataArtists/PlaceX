@@ -54,6 +54,8 @@
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Photo.cs" />
+    <Compile Include="Entities\PlaceInfo\PlaceInfoContext.cs" />
+    <Compile Include="Entities\PlaceInfo\Review.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInterest.cs" />

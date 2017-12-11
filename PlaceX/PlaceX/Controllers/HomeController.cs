@@ -11,17 +11,20 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using PlaceX.Models;
+using Common.DLL.Entities.PlaceInfo;
 
 namespace PlaceX.Controllers
 {
     public class HomeController : Controller
     {
+        PlaceInfoContext placeInfoDb = new PlaceInfoContext();
+
         [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
-
+        [AllowAnonymous]
         public ActionResult PlaceInfo(string placeId)
         {
             string placeInfo = GetPlaceJson("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8&language=ru");
@@ -38,7 +41,8 @@ namespace PlaceX.Controllers
                     PhoneNumber = foo.result.international_phone_number,
                     IconPath = foo.result.icon,
                     GoogleRating = foo.result.rating,
-                    PhotoUrl = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos.First.photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon
+                    PhotoUrl = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos.First.photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon,
+                    Reviews = (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).Count() > 0) ? placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).ToList() : new List<Review>()
                 };
 
                 return View(targetPlace);
@@ -58,6 +62,26 @@ namespace PlaceX.Controllers
                 var json = wc.DownloadString(url);
                 return json;
             }
+        }
+
+        [HttpPost]
+        public ActionResult AddReview(string textContent, string author, string googlePlaceId, int rating)
+        {
+            Review newReview = new Review()
+            {
+                TextContent = textContent,
+                Author = author,
+                GooglePlaceId = googlePlaceId,
+                Rating = rating,
+                Usefulness = 0,
+                PhotoUrl = String.Empty,
+                Date = DateTime.Now
+            };
+
+            placeInfoDb.Reviews.Add(newReview);
+            placeInfoDb.SaveChanges();
+
+            return PartialView(newReview);
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿namespace PlaceX.Models
+﻿using Common.DLL.Entities.PlaceInfo;
+using System;
+using System.Collections.Generic;
+
+namespace PlaceX.Models
 {
     public class PlaceViewModel
     {
@@ -9,5 +13,6 @@
         public string IconPath { get; set; }
         public string GoogleRating { get; set; }
         public string PhotoUrl { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
     }
 }
