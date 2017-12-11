@@ -41,9 +41,13 @@ namespace PlaceX.Controllers
                     PhoneNumber = foo.result.international_phone_number,
                     IconPath = foo.result.icon,
                     GoogleRating = foo.result.rating,
-                    PhotoUrl = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos.First.photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon,
+                    PhotosUrls = new object[foo.result.photos.Count],
                     Reviews = (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).Count() > 0) ? placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).ToList() : new List<Review>()
                 };
+                for (int i = 0; i < foo.result.photos.Count; i++)
+                {
+                    targetPlace.PhotosUrls[i] = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos[i].photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon;
+                }
 
                 return View(targetPlace);
             }

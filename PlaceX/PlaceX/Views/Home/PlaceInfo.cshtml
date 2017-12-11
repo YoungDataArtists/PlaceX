@@ -6,7 +6,7 @@
             <div class="well" style="padding: 1em 1em 0 1em;">
                 <div class="row">
                     <div class="headerPlace">
-                        <img src="@Model.PhotoUrl" class="img-thumbnail col-md-2 col-sm-5 col-xs-5" />
+                        <img src="@Model.PhotosUrls[0]" class="img-thumbnail col-md-2 col-sm-5 col-xs-5" />
                         <div class="row col-md-10 col-sm-7 col-xs-7">
                             <h1 class="text-center">@Model.Name</h1>
                         </div>
@@ -41,14 +41,18 @@
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <div class="carousel-col">
-                                        <div class="block img-responsive"><img src="https://igx.4sqi.net/img/general/200x200/48575131_gQMKJEULsYsdz4VU7y0a3dZ5p5qZHT5bSkt0oLaSKlY.jpg" /></div>
+                                        <div class="block img-responsive"><img src="@Model.PhotosUrls[0]" /></div>
                                     </div>
                                 </div>
+
+                                @for (int i = 1; i < Model.PhotosUrls.Length; i++)
+                                {
                                 <div class="item">
                                     <div class="carousel-col">
-                                        <div class="block img-responsive"><img src="https://igx.4sqi.net/img/general/200x200/48575131_pQ3HqBGxDAvB_AqcCFR-xoVnLB6wwUz0zD6Uvj3KqtA.jpg" /></div>
+                                        <div class="block img-responsive"><img src="@Model.PhotosUrls[i]" /></div>
                                     </div>
                                 </div>
+                                }
                                 <div class="item">
                                     <div class="carousel-col">
                                         <div class="block img-responsive"><img src="https://igx.4sqi.net/img/general/200x200/48575131_ARZxzZ3AXwUy75UEPp7fPY_4zkyBRANoTkTIkacUAEM.jpg" /></div>
