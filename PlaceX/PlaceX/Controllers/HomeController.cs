@@ -16,6 +16,8 @@ namespace PlaceX.Controllers
 {
     public class HomeController : Controller
     {
+        PlaceInfoContext placeInfoDb = new PlaceInfoContext();
+
         [AllowAnonymous]
         public ActionResult Index()
         {
