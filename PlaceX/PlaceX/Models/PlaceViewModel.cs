@@ -1,4 +1,5 @@
 ﻿using Common.DLL.Entities.PlaceInfo;
+using System;
 using System.Collections.Generic;
 
 namespace PlaceX.Models
