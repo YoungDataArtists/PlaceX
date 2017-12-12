@@ -28,8 +28,8 @@
         }
     }
 
-    double quantity_rating = rating_one + rating_two + rating_three + rating_four + rating_five;
-    double average_rating;
+    decimal quantity_rating = rating_one + rating_two + rating_three + rating_four + rating_five;
+    decimal average_rating;
     List<int> rating_list = new List<int>() { rating_one, rating_two, rating_three, rating_four, rating_five };
     int max_quantity_rating;
 
@@ -158,21 +158,21 @@
                         @average_rating.ToString("#.##") <small> / 5 </small>
                     }
                 </h2>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
+
+
+                @for (int i = 0; i < Decimal.Round(average_rating); i++)
+                {
+                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                }
+
+                @for (int i = 0; i < 5 - Decimal.Round(average_rating); i++)
+                {
+                    <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    </button>
+                }
             </div>
         </div>
         <div class="col-sm-4">
