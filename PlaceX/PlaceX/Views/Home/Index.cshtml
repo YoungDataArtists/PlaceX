@@ -4,36 +4,54 @@
 }
 
 
-
 <div class="container-fluid">
-    <nav class="navbar ">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <form class="navbar-form">
-            <div class="form-group">
-                <input type="text" class="form-control" id="search-input" placeholder="Search">
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <div class="row">
+            <div class="col-lg-9 col-sm-9 col-xs-8">
+                
+                <form class="form-inline">
+
+                    <input type="text" class="form-control" id="search-input" placeholder="Search">
+                    <button type="button" class="btn btn-primary" id="btn-my-location" title="To my location!" onclick="showMyPosition()"><span class="glyphicon glyphicon-map-marker"></span></button>
+                </form>
             </div>
-            <button type="button" class="btn btn-primary" id="btn-my-location" title="To my location!" onclick="showMyPosition()"><span class="glyphicon glyphicon-map-marker"></span></button>
-        </form>
-        <div class="sign">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="navbar-text pull-right">
-                    <p>Вы вошли как: @User.Identity.Name </p>
+
+            <div class="col-lg-3 col-sm-3 col-xs-3">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                        @if (User.Identity.IsAuthenticated)
+    {
+                    <li class="dropdown-header"> Вы вошли как: @User.Identity.Name</li>
+                    <li role="separator" class="divider"></li>
+
+using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
+{
+                    @Html.AntiForgeryToken()
+                    <li><input type="submit" class="btn btn-primary glyphicon-log-out pull-right" value="Sign out" /></li>
+}
+}
+else
+{
+                   <li> <button data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();" class="btn btn-primary pull-right">Sign Up</button></li>
+}
+                    </ul>
                 </div>
 
-                using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    <input type="submit" class="btn btn-primary glyphicon-log-out pull-right" value="Sign out" />
-                }
-            }
-            else
-            {
-                <button data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();" class="btn btn-primary pull-right">Sign Up</button>
-            }
-        </div>
-    </nav>
+
+
+
+
+
+</div>
+</div>
+
+    
+</nav>
 </div>
 
 
@@ -52,13 +70,13 @@
                             @using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="submit" id="google_login" class="circle google" name="provider" value="Google" title="Log in using your Google account" />
+                    <input type="submit" id="google_login" class="circle google " name="provider" value="Google" title="Log in using your Google account" />
     }
                             @*<i class="fa fa-google-plus" aria-hidden="true"></i>*@
                             @using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="submit" id="facebook_login" class="circle facebook" name="provider" value="Facebook" title="Log in using your Facebook account" />
+                    <input type="submit" id="facebook_login" class="circle facebook fa-input" name="provider" value="Facebook" title="Log in using your Facebook account" />
     }
                             @*<a id="facebook_login" class="circle facebook" href="#">
                     <i class="fa fa-facebook fa-fw"></i>*@

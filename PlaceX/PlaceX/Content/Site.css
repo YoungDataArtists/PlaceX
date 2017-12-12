@@ -1,4 +1,8 @@
-﻿body {
+﻿* {
+    *padding: 0;
+    *margin: 0;
+}
+body {
     padding-top: 0px;
     padding-bottom: 0px;
     overflow-x: hidden;
@@ -463,6 +467,7 @@ hr {
 /*placeinfo styles end*/
 
 /*sprite with stars*/
+/*
 #reviewStars-input input:checked ~ label, #reviewStars-input label, #reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
     background: url('http://positivecrash.com/wp-content/uploads/ico-s71a7fdede6.png') no-repeat;
 }
@@ -533,19 +538,54 @@ hr {
         left: 265px;
     }
 
-.navbar-form{
-display:inline-block;
-float:left;
-}
 .sign,btn-primary {
     margin: 8px 20px 0px 0px;
 }
+nav.navbar {
+    padding: 10px 0;
+}
 
+    nav.navbar .container-fluid {
+        padding: 0;
+    }
 
-.navbar-text {
-    color: #555555;
-    font-size:15px;
-    margin:1px 0 0 10px;
-    
+    nav.navbar .row {
+        width: 100%;
+        display: table;
+        margin: 0;
+    }
+
+    nav.navbar div[class*="col-"] {
+        float: none;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+        nav.navbar div[class*="col-"]:last-child {
+            text-align: right;
+        }
+
+    nav.navbar input[type="text"] {
+        width: auto;
+        display: inline-block;
+    }
+
+    nav.navbar .btn-primary {
+        margin-top: -2px;
+        margin-right:19px;
+    }
+
+    nav.navbar .dropdown-menu {
+        float: right !important;
+        right: 0 !important;
+        left: auto !important;
+    }
+
+@media(max-width:576px) {
+
+    nav.navbar div[class*="col-"] {
+        padding: 0;
+    }
+ 
 }
 
