@@ -7,6 +7,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/OwlCarousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/OwlCarousel/owl.theme.css">
 </head>
 <body>
 	
@@ -23,6 +25,23 @@
         @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 		@Scripts.Render("~/bundles/bootstrap")
 	    @Scripts.Render("~/bundles/angular")
+    <script src="~/Scripts/owl.carousel.min.js"></script>
 		@RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+
+            $("#owl-demo").owlCarousel({
+
+                autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+                items: 3,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [979, 3],
+                autoHeight: true
+
+            });
+
+        });
+    </script>
 </body>
 </html>

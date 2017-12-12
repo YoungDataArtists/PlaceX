@@ -27,7 +27,7 @@ namespace PlaceX.Controllers
         [AllowAnonymous]
         public ActionResult PlaceInfo(string placeId)
         {
-            string placeInfo = GetPlaceJson("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8&language=ru");
+            string placeInfo = GetPlaceJson("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=AIzaSyDAVUjsKnnRMjs32MZxlWvpAu-tQeQKMpY&language=ru");
 
             dynamic foo = JObject.Parse(placeInfo);
 
@@ -46,7 +46,7 @@ namespace PlaceX.Controllers
                 };
                 for (int i = 0; i < foo.result.photos.Count; i++)
                 {
-                    targetPlace.PhotosUrls[i] = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos[i].photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon;
+                    targetPlace.PhotosUrls[i] = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos[i].photo_reference + "&key=AIzaSyDAVUjsKnnRMjs32MZxlWvpAu-tQeQKMpY" : foo.result.icon;
                 }
 
                 return View(targetPlace);
