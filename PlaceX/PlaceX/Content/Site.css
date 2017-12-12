@@ -549,3 +549,14 @@ float:left;
     
 }
 
+#owl-demo .item {
+    margin: 3px;
+    height: 200px;
+}
+
+    #owl-demo .item img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
