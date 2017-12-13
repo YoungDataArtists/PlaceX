@@ -85,7 +85,15 @@ namespace PlaceX.Controllers
             placeInfoDb.Reviews.Add(newReview);
             placeInfoDb.SaveChanges();
 
-            return PartialView(newReview);
+            return RedirectToAction("ShowReviews", new { googlePlaceId = googlePlaceId });
+        }
+
+        [AllowAnonymous]
+        public ActionResult ShowReviews(string googlePlaceId)
+        {
+            var reviews = (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).Count() > 0) ? placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).ToList() : new List<Review>();
+
+            return PartialView(reviews);
         }
     }
 }

@@ -216,7 +216,7 @@
     {
         <div class="row ">
             <div class="col-lg-12">
-                @using (Ajax.BeginForm("AddReview", new AjaxOptions { UpdateTargetId = "newReview" }))
+                @using (Ajax.BeginForm("AddReview", new AjaxOptions { UpdateTargetId = "reviewsUpdate" }))
                 {
 
                     <div class="input-group">
@@ -250,53 +250,10 @@
     <div class="row">
         <div class="col-sm-12">
             <hr />
-            <div id="newReview"></div>
-            <hr />
-
-            @if (Model.Reviews.Count() == 0)
-            {
-                <p>К сожалению, нет отзывов об этом месте. Станьте первым и оставьте за собой след! :)</p>
-            }
-            else
-            {
-                foreach (var review in Model.Reviews)
-                {
-                    TimeSpan deltaDate = DateTime.Now - review.Date;
-                    string delta = (deltaDate.Days == 0) ? "Today" : deltaDate.Days.ToString() + " day(s) ago";
-
-                    <div class="review-block">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                                <div class="review-block-name"><a href="#">@review.Author</a></div>
-                                <div class="review-block-date">@review.Date.Date.ToShortDateString()<br /> @delta</div>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="review-block-rate">
-
-                                    @for (int i = 0; i < review.Rating; i++)
-                                    {
-                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                        </button>
-                                    }
-
-                                    @for (int i = 0; i < 5 - review.Rating; i++)
-                                    {
-                                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                        </button>
-                                    }
-                                </div>
-                                <div class="review-block-title">@review.TextContent</div>
-                                <div class="review-block-description">@review.TextContent</div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                }
-            }        
+            <div id="reviewsUpdate">
+                @Html.Action("ShowReviews", "Home", new { googlePlaceId = Model.Id })
+            </div>
+            <hr />                  
         </div>
     </div>
 </div>
-
