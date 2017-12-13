@@ -13,6 +13,6 @@ namespace PlaceX.Models
         public string IconPath { get; set; }
         public string GoogleRating { get; set; }
         public object [] PhotosUrls { get; set; }
-        public IEnumerable<Review> Reviews { get; set; }
+        //public IEnumerable<Review> Reviews { get; set; }
     }
 }

@@ -42,7 +42,7 @@ namespace PlaceX.Controllers
                     IconPath = foo.result.icon,
                     GoogleRating = foo.result.rating,
                     PhotosUrls = new object[foo.result.photos.Count],
-                    Reviews = (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).Count() > 0) ? placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).ToList() : new List<Review>()
+                    //Reviews = (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).Count() > 0) ? placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).ToList() : new List<Review>()
                 };
                 for (int i = 0; i < foo.result.photos.Count; i++)
                 {
