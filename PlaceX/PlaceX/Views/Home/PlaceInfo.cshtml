@@ -117,7 +117,7 @@
         <div class="col-sm-12">
             <hr />
             <div id="reviewsUpdate">
-                @Html.Action("ShowReviews", "Home", new { googlePlaceId = Model.Id })
+                @Html.Action("ShowReviews", "Home", new { googlePlaceId = Model.Id , sortedByDateDesc = true})
             </div>
             <hr />                  
         </div>

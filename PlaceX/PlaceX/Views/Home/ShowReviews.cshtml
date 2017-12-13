@@ -162,7 +162,12 @@
     <p>Unfortunately, there are no reviews for this place. Be the first and leave a trace behind! :)</p>
 }
 else
-{
+{<p>
+    Sort by:    @Ajax.ActionLink("Date ↓", "ShowReviews", "Home", new { googlePlaceId = Model.FirstOrDefault().GooglePlaceId, sortedByDateDesc = true }, new AjaxOptions { UpdateTargetId = "reviewsUpdate" }, null)
+                @Ajax.ActionLink("Date ↑", "ShowReviews", "Home", new { googlePlaceId = Model.FirstOrDefault().GooglePlaceId, sortedByDateAds= true }, new AjaxOptions { UpdateTargetId = "reviewsUpdate" }, null)
+                @Ajax.ActionLink("Rating ↓", "ShowReviews", "Home", new { googlePlaceId = Model.FirstOrDefault().GooglePlaceId, sortedByRatingMaxMin = true }, new AjaxOptions { UpdateTargetId = "reviewsUpdate" }, null)
+                @Ajax.ActionLink("Rating ↑", "ShowReviews", "Home", new { googlePlaceId = Model.FirstOrDefault().GooglePlaceId, sortedByRatingMinMax = true }, new AjaxOptions { UpdateTargetId = "reviewsUpdate" }, null)
+</p>
     foreach (var review in Model)
     {
         TimeSpan deltaDate = DateTime.Now - review.Date;

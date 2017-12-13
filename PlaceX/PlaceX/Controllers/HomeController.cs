@@ -85,13 +85,41 @@ namespace PlaceX.Controllers
             placeInfoDb.Reviews.Add(newReview);
             placeInfoDb.SaveChanges();
 
-            return RedirectToAction("ShowReviews", new { googlePlaceId = googlePlaceId });
+            return RedirectToAction("ShowReviews", new { googlePlaceId = googlePlaceId , sortedByDateDesc = true});
         }
 
         [AllowAnonymous]
-        public ActionResult ShowReviews(string googlePlaceId)
+        public ActionResult ShowReviews(string googlePlaceId, bool? sortedByDateAds, bool? sortedByDateDesc, bool? sortedByRatingMaxMin, bool? sortedByRatingMinMax)
         {
-            var reviews = (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).Count() > 0) ? placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).ToList() : new List<Review>();
+            List<Review> reviews;
+
+            if (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).Count() > 0)
+            {
+                if (sortedByDateAds == true)
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).OrderBy(p => p.Date).ToList();
+                }
+                else if (sortedByDateDesc == true)
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).OrderByDescending(p => p.Date).ToList();
+                }
+                else if (sortedByRatingMaxMin == true)
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).OrderByDescending(p => p.Rating).ToList();
+                }
+                else if (sortedByRatingMinMax == true)
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).OrderBy(p => p.Rating).ToList();
+                }
+                else
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).ToList();
+                }
+            }
+            else
+            {
+                reviews = new List<Review>();
+            }            
 
             return PartialView(reviews);
         }
