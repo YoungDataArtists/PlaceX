@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -61,6 +62,33 @@ namespace PlaceX.Controllers
             return View();
         }
 
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult LoginWithAjax(string email, string password)
+        {
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result =  SignInManager.PasswordSignIn(email, password, false, shouldLockout: false);//remember me:false?
+
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return Json(new { Success = true });
+                case SignInStatus.Failure:
+                    {
+                        ModelState.AddModelError("Email", "Invalid login attempt.");
+                        return Json(new { Success = false });
+                    }
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return Json(new { Success = false });
+            }
+        }
+
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -85,6 +113,12 @@ namespace PlaceX.Controllers
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
+                    {
+                        TempData["Message"] = "Invalid login attempt";
+                        ViewBag.ErrorMessage = "Email not found or matched";
+                        ModelState.AddModelError("Email", "Invalid login attempt.");
+                        return RedirectToAction("Index", "Home", new { ReturnUrl = returnUrl});
+                    }
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);

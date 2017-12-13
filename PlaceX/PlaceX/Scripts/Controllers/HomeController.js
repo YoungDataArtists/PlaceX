@@ -160,18 +160,26 @@
     }
 
     function loginAjax() {
-          /* Remove this comments when moving to server */
-        //$.post( "/login", function( data ) {
-        //        if(data == 1){
-        //            window.location.replace("/home");            
-        //        } else {
-        //             shakeModal(); 
-        //        }
-        //    });
-        
-
-        /*   Simulate error message from the server   */
-        /* shakeModal(); */
+        var form = $('#__AjaxAntiForgeryForm');
+        var token = $('input[name="__RequestVerificationToken"]', form).val();
+        $.ajax({
+            type: 'POST',
+            url: "Account/LoginWithAjax",
+            data: {
+                __RequestVerificationToken: token,
+                email: $('#email').val(),
+                password: $('#password').val()
+            },
+            success: function (data, status, xhr) {
+                if (data.Success)
+                    window.location.replace("");
+                else {
+                    shakeModal();
+                    //return false;
+                }
+            },
+            async: false
+        });
     }
 
     function shakeModal() {
@@ -182,6 +190,7 @@
             $('#loginModal .modal-dialog').removeClass('shake');
         }, 1000);
     }
+
     // тут лютый костыль из-за особенностей гугл api
     setTimeout(mapPosition, 1000);
     function mapPosition() {
@@ -208,5 +217,6 @@
             next.children(':first-child').clone().appendTo($(this));
         }
     });
+
 
     
