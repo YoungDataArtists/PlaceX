@@ -27,21 +27,5 @@
 	    @Scripts.Render("~/bundles/angular")
     <script src="~/Scripts/owl.carousel.min.js"></script>
 		@RenderSection("scripts", required: false)
-    <script>
-        $(document).ready(function () {
-
-            $("#owl-demo").owlCarousel({
-
-                autoPlay: 3000, //Set AutoPlay to 3 seconds
-
-                items: 3,
-                itemsDesktop: [1199, 3],
-                itemsDesktopSmall: [979, 3],
-                autoHeight: true
-
-            });
-
-        });
-    </script>
 </body>
 </html>

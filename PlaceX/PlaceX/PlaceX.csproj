@@ -1065,6 +1065,7 @@
     <Content Include="Views\Home\PlaceInfo.cshtml" />
     <Content Include="Views\Home\Review.cshtml" />
     <Content Include="Views\Home\AddReview.cshtml" />
+    <Content Include="Views\Home\ShowReviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\PlaceView\" />
