@@ -600,3 +600,12 @@ nav.navbar {
         height: auto;
     }
 
+#notifies {
+    position: fixed;
+    width: auto;
+    height: auto;
+    top: 0;
+    right: 0;
+    z-index: 99;
+}		
+
