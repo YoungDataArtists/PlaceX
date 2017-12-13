@@ -27,7 +27,7 @@ namespace PlaceX.Controllers
         [AllowAnonymous]
         public ActionResult PlaceInfo(string placeId)
         {
-            string placeInfo = GetPlaceJson("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8&language=ru");
+            string placeInfo = GetPlaceJson("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=AIzaSyDAVUjsKnnRMjs32MZxlWvpAu-tQeQKMpY&language=ru");
 
             dynamic foo = JObject.Parse(placeInfo);
 
@@ -42,11 +42,11 @@ namespace PlaceX.Controllers
                     IconPath = foo.result.icon,
                     GoogleRating = foo.result.rating,
                     PhotosUrls = new object[foo.result.photos.Count],
-                    Reviews = (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).Count() > 0) ? placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).ToList() : new List<Review>()
+                    //Reviews = (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).Count() > 0) ? placeInfoDb.Reviews.Where(r => r.GooglePlaceId == placeId).ToList() : new List<Review>()
                 };
                 for (int i = 0; i < foo.result.photos.Count; i++)
                 {
-                    targetPlace.PhotosUrls[i] = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos[i].photo_reference + "&key=AIzaSyArQis35LbcmrOvvVlAJtsHABL7ObLubk8" : foo.result.icon;
+                    targetPlace.PhotosUrls[i] = (foo.result.photos != null) ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=" + foo.result.photos[i].photo_reference + "&key=AIzaSyDAVUjsKnnRMjs32MZxlWvpAu-tQeQKMpY" : foo.result.icon;
                 }
 
                 return View(targetPlace);
@@ -85,7 +85,43 @@ namespace PlaceX.Controllers
             placeInfoDb.Reviews.Add(newReview);
             placeInfoDb.SaveChanges();
 
-            return PartialView(newReview);
+            return RedirectToAction("ShowReviews", new { googlePlaceId = googlePlaceId , sortedByDateDesc = true});
+        }
+
+        [AllowAnonymous]
+        public ActionResult ShowReviews(string googlePlaceId, bool? sortedByDateAds, bool? sortedByDateDesc, bool? sortedByRatingMaxMin, bool? sortedByRatingMinMax)
+        {
+            List<Review> reviews;
+
+            if (placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).Count() > 0)
+            {
+                if (sortedByDateAds == true)
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).OrderBy(p => p.Date).ToList();
+                }
+                else if (sortedByDateDesc == true)
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).OrderByDescending(p => p.Date).ToList();
+                }
+                else if (sortedByRatingMaxMin == true)
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).OrderByDescending(p => p.Rating).ToList();
+                }
+                else if (sortedByRatingMinMax == true)
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).OrderBy(p => p.Rating).ToList();
+                }
+                else
+                {
+                    reviews = placeInfoDb.Reviews.Where(r => r.GooglePlaceId == googlePlaceId).ToList();
+                }
+            }
+            else
+            {
+                reviews = new List<Review>();
+            }            
+
+            return PartialView(reviews);
         }
     }
 }
