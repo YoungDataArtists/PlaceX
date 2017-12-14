@@ -33,12 +33,30 @@ using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
 {
                     @Html.AntiForgeryToken()
                     <li><input type="submit" class="btn btn-primary glyphicon-log-out pull-right" value="Sign out" /></li>
-}
-}
-else
-{
-                   <li> <button data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();" class="btn btn-primary pull-right">Sign Up</button></li>
-}
+                            }
+                        }
+                        else
+                        {
+                            if (TempData["ExternalSignInMessage"] == null)
+                            {
+                    <li> <button data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();" class="btn btn-primary pull-right">Sign Up</button></li>
+                            }
+                            else
+                            {
+                            <li>
+                        @using (Html.BeginForm("ExternalLoginConfirmationForSinglePage", "Account", new { email = TempData["ExternalSignInMessage"], ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form -horizontal", role = "form" }))
+                        {
+                            //TempData["email"] = TempData["ExternalSignInMessage"];
+                    @Html.AntiForgeryToken()
+                                <p>
+                                    You've successfully authenticated with @TempData["LoginProvider"].
+                                    Click the Register button to create an account in PlaceX.
+                                </p>
+                    <input type="submit" class="btn btn-default" value="Register" />
+                        }
+                    </li>
+                            }
+                        }
                     </ul>
                 </div>
 

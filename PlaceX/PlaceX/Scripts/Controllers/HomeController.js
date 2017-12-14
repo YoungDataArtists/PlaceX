@@ -175,11 +175,13 @@
                     window.location.replace("");
                 else {
                     shakeModal();
-                    //return false;
+                    return false;
                 }
+
             },
             async: false
         });
+        return false;
     }
 
     function shakeModal() {
