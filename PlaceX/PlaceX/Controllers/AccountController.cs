@@ -411,6 +411,8 @@ namespace PlaceX.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        UserManager.ConfirmEmail(user.Id, UserManager.GenerateEmailConfirmationToken(user.Id));
+                        TempData["emailConfirmedOrNot"] = "confirmed";
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }

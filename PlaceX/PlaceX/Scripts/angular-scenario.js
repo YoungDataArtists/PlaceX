@@ -16657,7 +16657,8 @@ function Browser(window, document, $log, $sniffer) {
         try {
           return history.state;
         } catch (e) {
-          // MSIE can reportedly throw when there is no state (UNCONFIRMED).
+          // MSIE can reportedly throw when there is no state (UN
+          ).
         }
       };
 
